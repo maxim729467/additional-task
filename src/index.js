@@ -86,14 +86,14 @@ function getTarget() {
 
 function onNameInputHandler(e) {
     localStorage.setItem('name', e.currentTarget.value);
-    refs.name.style.width = ((e.currentTarget.value.length + 1) * 30) + 'px';
+    refs.name.style.width = ((e.currentTarget.value.length + 1) * 30) + 500 + 'px';
 
 
     if (e.type === 'keydown' && e.code === 'Enter') {
 
     if (e.currentTarget.value.length === 0) {
         refs.name.value = '[Введите имя]';
-        refs.name.style.width = ((e.currentTarget.value.length + 1) * 30) + 'px';
+        refs.name.style.width = ((e.currentTarget.value.length + 1) * 30) + 500 + 'px';
     }
         refs.name.blur();
     }
@@ -102,34 +102,40 @@ function onNameInputHandler(e) {
 
 function onTargetInputHandler(e) {
     localStorage.setItem('target', e.currentTarget.value);
-    refs.target.style.width = ((e.currentTarget.value.length + 1) * 30) + 'px';
+    refs.target.style.width = ((e.currentTarget.value.length + 1) * 30) + 500 + 'px';
     
     if (e.type === 'keydown' && e.code === 'Enter') {
 
         if (e.currentTarget.value.length === 0) {
             refs.target.value = '[Введите имя]';
-            refs.target.style.width = ((e.currentTarget.value.length + 1) * 30) + 'px';
+            refs.target.style.width = ((e.currentTarget.value.length + 1) * 30) + 500 + 'px';
     }
         refs.target.blur();
         return;
     }
 }
 
-function onNameFocusHandler(e) {
+function onItemFocusHandler(e) {
     e.currentTarget.value = '';
 }
 
-function onTargetFocusHandler(e) {
-    e.currentTarget.value = '';
+function onNameBlurHandler(e) {
+    getName(e);
+}
+
+function onTargetBlurHandler(e) {
+    getTarget(e);
 }
 
 refs.name.addEventListener('keydown', onNameInputHandler);
 refs.name.addEventListener('input', onNameInputHandler);
-refs.name.addEventListener('focus', onNameFocusHandler);
+refs.name.addEventListener('focus', onItemFocusHandler);
+refs.name.addEventListener('blur', onNameBlurHandler);
 
 refs.target.addEventListener('keydown', onTargetInputHandler);
 refs.target.addEventListener('input', onTargetInputHandler);
-refs.target.addEventListener('focus', onTargetFocusHandler);
+refs.target.addEventListener('focus', onItemFocusHandler);
+refs.target.addEventListener('blur', onTargetBlurHandler);
 
 showTime();
 setBg();
